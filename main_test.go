@@ -5,17 +5,18 @@ import (
 	"testing"
 )
 
+// tests sets up a slice of structs that we will use for our table driven test.
 var tests = []struct {
-	name     string
-	dividend int
-	divisor  int
-	expected int
-	isErr    bool
-} {
-	{ "valid-data", 100, 10, 10, false },
-	{ "invalid-data", 100, 0, 0, true },
-	{ "expect 5", 50, 10, 5, false },
-	{ "expect 5", 70, 7, 10, false },
+	name     string // the name of the test
+	dividend int    // the number that will be divided
+	divisor  int    // what we will divide by
+	expected int    // the expected result (will be zero if an error is returned)
+	isErr    bool   // whether or not the data should generate an error
+}{
+	{"valid-data", 100, 10, 10, false},
+	{"invalid-data", 100, 0, 0, true},
+	{"expect-5", 50, 10, 5, false},
+	{"expect-7", 70, 7, 10, false},
 }
 
 // TestDivision uses table driven tests to run large amounts of data against the same test
