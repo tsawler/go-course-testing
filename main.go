@@ -15,9 +15,8 @@ func main() {
 	log.Println("result of division is", result)
 }
 
-// divide takes two ints (dividend and divisor) and performs division.
-// If the divisor is zero, it returns 0 and an error; otherwise, it returns the result of the division
-// and nil
+// divide takes two integers (dividend and divisor) and performs integer division. If the divisor is zero,
+// it returns 0 and an error; otherwise, it returns the result of the division and nil.
 func divide(x, y int) (int, error) {
 	var result int
 	if y == 0 {
