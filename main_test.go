@@ -7,16 +7,17 @@ import (
 
 // tests sets up a slice of structs that we will use for our table driven test.
 var tests = []struct {
-	name     string // the name of the test
-	dividend int    // the number that will be divided
-	divisor  int    // what we will divide by
-	expected int    // the expected result (will be zero if an error is returned)
-	isErr    bool   // whether or not the data should generate an error
+	name     string  // the name of the test
+	dividend float32 // the number that will be divided
+	divisor  float32 // what we will divide by
+	expected float32 // the expected result (will be zero if an error is returned)
+	isErr    bool    // whether or not the data should generate an error
 }{
-	{"valid-data", 100, 10, 10, false},
-	{"invalid-data", 100, 0, 0, true},
-	{"expect-5", 50, 10, 5, false},
-	{"expect-7", 70, 7, 10, false},
+	{"valid-data", 100.0, 10.0, 10.0, false},
+	{"invalid-data", 100.0, 0, 0, true},
+	{"expect-5", 50.0, 10.0, 5.0, false},
+	{"expect-7", 70.0, 7.0, 10.0, false},
+	{"expect-0", 0, 1000, 0, false},
 }
 
 // TestDivision uses table driven tests to run large amounts of data against the same test
@@ -26,17 +27,17 @@ func TestDivision(t *testing.T) {
 			got, err := divide(tt.dividend, tt.divisor)
 			if tt.isErr {
 				if err == nil {
-					t.Log(fmt.Sprintf("Passed %d and %d and got %d", tt.dividend, tt.divisor, got))
+					t.Log(fmt.Sprintf("Passed %f and %f and got %f", tt.dividend, tt.divisor, got))
 					t.Error("expected error but did not get one")
 				}
 			} else {
-				t.Log(fmt.Sprintf("Passed %d and %d and got %d", tt.dividend, tt.divisor, got))
+				t.Log(fmt.Sprintf("Passed %f and %f and got %f", tt.dividend, tt.divisor, got))
 				if err != nil {
 					t.Error("Did not expect an error, but got error of", err.Error())
 				}
 			}
 			if got != tt.expected {
-				t.Errorf("expected %d but got %d", tt.expected, got)
+				t.Errorf("expected %f but got %f", tt.expected, got)
 			}
 		})
 	}
@@ -46,7 +47,7 @@ func TestDivision(t *testing.T) {
 
 // TestDivide tests valid data
 func TestDivide(t *testing.T) {
-	_, err := divide(10, 1)
+	_, err := divide(10.0, 1.0)
 	if err != nil {
 		t.Error("Got an error when we should not have")
 	}
@@ -54,7 +55,7 @@ func TestDivide(t *testing.T) {
 
 // TestBadDivide tests invalid data (division by zero)
 func TestBadDivide(t *testing.T) {
-	_, err := divide(10, 0)
+	_, err := divide(10.0, 0)
 	if err == nil {
 		t.Error("Did not get an error when we should have")
 	}
