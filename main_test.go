@@ -42,6 +42,8 @@ func TestDivision(t *testing.T) {
 	}
 }
 
+// NOTE: with our table driven test, the next two tests are redundant
+
 // TestDivide tests valid data
 func TestDivide(t *testing.T) {
 	_, err := divide(10, 1)
