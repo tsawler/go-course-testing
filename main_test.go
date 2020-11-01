@@ -18,6 +18,7 @@ var tests = []struct {
 	{"expect-5", 50.0, 10.0, 5.0, false},
 	{"expect-7", 70.0, 7.0, 10.0, false},
 	{"expect-0", 0, 1000, 0, false},
+	{"expect-fraction", -1, -777, 0.0012870013, false},
 }
 
 // TestDivision uses table driven tests to run large amounts of data against the same test
